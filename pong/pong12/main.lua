@@ -175,8 +175,8 @@ function love.update(dt)
         end
     end
 
-     --player one movement
-     if love.keyboard.isDown('w') then
+    --player one movement
+    if love.keyboard.isDown('w') then
         player1.dy = -PADDLE_SPEED
     elseif love.keyboard.isDown('s') then
         player1.dy = PADDLE_SPEED
@@ -280,7 +280,7 @@ function love.draw()
     ball:render()
 
     displayFPS()
-
+    
     --end the rendering at virtual resolution
     push:apply('end')
 end

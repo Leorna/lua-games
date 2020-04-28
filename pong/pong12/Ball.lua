@@ -27,7 +27,7 @@ end
     Return true or false, depending on wheter the paddle and teh ball have collided
 ]]
 function Ball:collides(paddle)
-    --first, check to see if the left edge ir either is farther to the right
+    --first, check to see if the left edge is either farther to the right
     --then the right edge of the other
     if self.x > paddle.x + paddle.width or paddle.x > self.x + self.width then
         return false
