@@ -22,6 +22,28 @@ function Ball:new(x, y, width, height)
     return o
 end
 
+
+--[[
+    Return true or false, depending on wheter the paddle and teh ball have collided
+]]
+function Ball:collides(paddle)
+    --first, check to see if the left edge ir either is farther to the right
+    --then the right edge of the other
+    if self.x > paddle.x + paddle.width or paddle.x > self.x + self.width then
+        return false
+    end
+
+    --then check to see if the bottom edge of either is higher than the top edge of the other
+    if self.y > paddle.y + paddle.height or paddle.y > self.y + self.height then
+        return false
+    end
+    
+    return true
+end
+
+
+
+
 --[[
     Places the ball in the middle of the screen and a initial random velocity
     for x and y axis
