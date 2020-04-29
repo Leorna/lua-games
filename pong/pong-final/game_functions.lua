@@ -90,7 +90,7 @@ function game_functions.check_for_scores(ball, player1, player2, sounds, setting
     end
 
     if ball.x > settings.virtual_width then
-        settings.serving_player = 1
+        settings.serving_player = 2
         player1.score = player1.score + 1
 
         sounds.score:play()

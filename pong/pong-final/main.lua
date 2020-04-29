@@ -125,7 +125,7 @@ local function display_info()
         love.graphics.printf('Press Enter to serve!', 0, 20, settings.virtual_width, 'center')
     elseif settings.game_state == 'done' then
         love.graphics.setFont(fonts.large)
-        local text = 'Player '..tostring(settings.serving_player)..' wins'
+        local text = 'Player '..tostring(settings.winning_player)..' wins'
         love.graphics.printf(text, 0, 10, settings.virtual_width, 'center')
         love.graphics.setFont(fonts.small)
         love.graphics.printf('Press Enter to begin!', 0, 30, settings.virtual_width, 'center')
