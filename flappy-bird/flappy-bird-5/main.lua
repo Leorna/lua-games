@@ -1,5 +1,8 @@
 local push = require 'push'
+
 require 'Bird'
+require 'Pipe'
+
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -22,11 +25,18 @@ local BACKGROUND_LOOPING_POINT = 413
 
 local bird = Bird:new()
 
+local pipes = {}
+
+local timer = 0
+
+
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     love.window.setTitle('Flappy Bird')
+
+    math.randomseed(os.time())
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync=true,
@@ -38,9 +48,11 @@ function love.load()
     love.keyboard.keysPressed = {}
 end
 
+
 function love.resize(w, h)
     push:resize(w, h)
 end
+
 
 function love.keypressed(key)
     love.keyboard.keysPressed[key] = true
@@ -61,7 +73,24 @@ function love.update(dt)
     backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
     groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
 
+    timer = timer + dt
+    
+    if timer > 2 then
+        table.insert(pipes, Pipe:new())
+        timer = 0
+    end
+
+
     bird:update(dt)
+
+    for index, pipe in pairs(pipes) do
+        pipe:update(dt)
+
+        if pipe.x < -pipe.width then
+            table.remove(pipes, index)
+        end
+    end
+
 
     love.keyboard.keysPressed = {}
 end
@@ -73,6 +102,10 @@ function love.draw()
         push:apply('start') and push:apply('end') are deprecated
     ]]
     love.graphics.draw(background, -backgroundScroll, 0)
+
+    for _, pipe in pairs(pipes) do
+        pipe:render()
+    end
 
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
 
