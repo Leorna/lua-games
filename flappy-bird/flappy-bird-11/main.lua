@@ -15,6 +15,7 @@ require 'states.BaseState'
 require 'states.PlayState'
 require 'states.ScoreState'
 require 'states.TitleScreenState'
+require 'states.CountdownState'
 
 
 --Physical screen dimensions
@@ -64,6 +65,21 @@ function love.load()
     hugeFont = love.graphics.newFont('fonts/flappy.ttf', 56)
     love.graphics.setFont(flappyFont)
 
+
+
+    --initialize the table of sounds
+    sounds = {
+        jump = love.audio.newSource('sounds/jump.wav', 'static'),
+        explosion = love.audio.newSource('sounds/explosion.wav', 'static'),
+        hurt = love.audio.newSource('sounds/hurt.wav', 'static'),
+        score = love.audio.newSource('sounds/score.wav', 'static'),
+        music = love.audio.newSource('sounds/marios_way.mp3', 'static')
+    }
+
+    --play the sounds
+    sounds.music:setLooping(true)
+    sounds.music:play()
+
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync=true,
         fullscreen=false,
@@ -75,7 +91,8 @@ function love.load()
     gStateMachine = StateMachine:new {
         title = function () return TitleScreenState:new() end,
         play = function () return PlayState:new() end,
-        score = function () return ScoreState:new() end
+        score = function () return ScoreState:new() end,
+        countdown = function () return CountdownState:new() end
     }
 
     gStateMachine:change('title')

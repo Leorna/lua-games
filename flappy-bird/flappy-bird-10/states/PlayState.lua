@@ -14,7 +14,7 @@ BIRD_WIDTH = 38
 BIRD_HEIGHT = 24
 
 
-function PlayState:new() 
+function PlayState:new()
     local this = BaseState:new()
     setmetatable(this, self)
     self.__index = self

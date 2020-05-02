@@ -14,7 +14,7 @@ BIRD_WIDTH = 38
 BIRD_HEIGHT = 24
 
 
-function PlayState:new() 
+function PlayState:new()
     local this = BaseState:new()
     setmetatable(this, self)
     self.__index = self
@@ -64,6 +64,7 @@ function PlayState:update(dt)
             if pair.x + PIPE_WIDTH < self.bird.x then
                 self.score = self.score + 1
                 pair.scored = true
+                sounds.score:play()
             end
         end
 
@@ -81,20 +82,26 @@ function PlayState:update(dt)
         end
     end
 
-    --update the bird based on gravity and input
-    self.bird:update(dt)
-
     --detects collision between the bird and the pipes
     for _, pair in pairs(self.pipePairs) do
         for _, pipe in pairs(pair.pipes) do
             if self.bird:collides(pipe) then
+                sounds.explosion:play()
+                sounds.hurt:play()
+
                 gStateMachine:change('score', { score=self.score })
             end
         end
     end
 
+    --update the bird based on gravity and input
+    self.bird:update(dt)
+
     --reset if we get to the ground
     if self.bird.y > VIRTUAL_HEIGHT - 15 then
+        sounds.explosion:play()
+        sounds.hurt:play()
+
         gStateMachine:change('score', { score=self.score })
     end
 end

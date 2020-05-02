@@ -15,6 +15,7 @@ require 'states.BaseState'
 require 'states.PlayState'
 require 'states.ScoreState'
 require 'states.TitleScreenState'
+require 'states.CountdownState'
 
 
 --Physical screen dimensions
@@ -75,7 +76,8 @@ function love.load()
     gStateMachine = StateMachine:new {
         title = function () return TitleScreenState:new() end,
         play = function () return PlayState:new() end,
-        score = function () return ScoreState:new() end
+        score = function () return ScoreState:new() end,
+        countdown = function () return CountdownState:new() end
     }
 
     gStateMachine:change('title')
