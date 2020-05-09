@@ -117,14 +117,6 @@ end
 
 
 function PlayState:render()
-    if self.paused then
-        love.graphics.setFont(flappyFont)
-        love.graphics.printf('Paused!', 0, 120, VIRTUAL_WIDTH, 'center')
-
-        love.graphics.setFont(mediumFont)
-        love.graphics.printf('Press p to continue!', 0, 160, VIRTUAL_WIDTH, 'center')
-    end
-
     for _, pair in pairs(self.pipePairs) do
         pair:render()
     end
@@ -133,4 +125,12 @@ function PlayState:render()
     love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
     
     self.bird:render()
+
+    if self.paused then
+        love.graphics.setFont(flappyFont)
+        love.graphics.printf('Paused!', 0, 120, VIRTUAL_WIDTH, 'center')
+
+        love.graphics.setFont(mediumFont)
+        love.graphics.printf('Press p to continue!', 0, 160, VIRTUAL_WIDTH, 'center')
+    end
 end
