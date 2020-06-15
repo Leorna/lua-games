@@ -9,6 +9,15 @@ function PlayState:new()
     o.paddle = Paddle:new()
     o.paused = false
 
+
+    o.ball = Ball:new(1)
+    o.ball.dx = math.random(-200, 200)
+    o.ball.dy = math.random(-50, -60)
+
+    --give ball position in the center
+    o.ball.x = VIRTUAL_WIDTH / 2 - 4
+    o.ball.y = VIRTUAL_HEIGHT - 42
+
     return o
 end
 
@@ -29,6 +38,12 @@ function PlayState:update(dt)
 
     
     self.paddle:update(dt)
+    self.ball:update(dt)
+
+    if self.ball:collides(self.paddle) then
+        self.ball.dy = -self.ball.dy
+        gSounds['paddle-hit']:play()
+    end
 
     if love.keyboard.wasPressed('q') then
         love.event.quit()
@@ -38,6 +53,7 @@ end
 
 function PlayState:render()
     self.paddle:render()
+    self.ball:render()
 
     if self.paused then
         love.graphics.setFont(gFonts.large)
