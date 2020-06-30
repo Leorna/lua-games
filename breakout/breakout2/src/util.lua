@@ -97,9 +97,5 @@ function util.generateQuadsBalls(atlas)
 end
 
 
-function util.generateQuadsBricks(atlas)
-    return table.slice(util.generateQuads(atlas, 32, 16), 1, 21)
-end
-
 
 return util

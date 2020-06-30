@@ -22,7 +22,7 @@ require 'src.StateMachine'
 
 -- utility functions, mainly for splitting our sprite sheet into various Quads
 -- of differing sizes for paddles, balls, bricks, etc.
-require 'src.Util'
+util = require 'src.util'
 
 
 
