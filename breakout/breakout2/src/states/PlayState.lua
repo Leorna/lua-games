@@ -10,7 +10,7 @@ function PlayState:new()
     o.paused = false
 
 
-    o.ball = Ball:new(1)
+    o.ball = Ball:new(math.random(7))
     o.ball.dx = math.random(-200, 200)
     o.ball.dy = math.random(-50, -60)
 
