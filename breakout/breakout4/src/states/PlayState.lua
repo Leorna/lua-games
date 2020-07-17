@@ -91,7 +91,7 @@ function PlayState:update(dt)
 
             self.ball.dy = self.ball.dy * 1.02 -- scale the y velocity to speed up the game
             
-            break
+            break -- only allow colliding with
         end
     end
 
