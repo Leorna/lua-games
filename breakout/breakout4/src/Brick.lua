@@ -36,11 +36,11 @@ function Brick:render()
     if self.inPlay then
         love.graphics.draw(gTextures.main,
 
-        -- multiply color by 4 (-1) to get the color offset, then add tier
-        -- to draw the correct tier and color brick on the screen
-        gFrames.bricks[1 + ((self.color-1) * 4) + self.tier],
-        self.x,
-        self.y
-    )
+            -- multiply color by 4 (-1) to get the color offset, then add tier
+            -- to draw the correct tier and color brick on the screen
+            gFrames.bricks[1 + ((self.color-1) * 4) + self.tier],
+            self.x,
+            self.y
+        )
     end
 end
