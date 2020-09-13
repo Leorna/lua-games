@@ -27,8 +27,28 @@ end
     changing its color otherwise
 ]]
 function Brick:hit()
+    gSounds['brick-hit-2']:stop()
     gSounds['brick-hit-2']:play()
-    self.inPlay = false
+    
+    if self.tier > 0 then
+        if self.color == 1 then
+            self.tier = self.tier - 1
+            self.color = 5
+        else
+            self.color = self.color - 1
+        end
+    else
+        if self.color == 1 then
+            self.inPlay = false
+        else
+            self.color = self.color - 1
+        end
+    end
+
+    if not self.inPlay then
+        gSounds['brick-hit-1']:stop()
+        gSounds['brick-hit-1']:play()
+    end
 end
 
 
